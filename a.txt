@@ -1,0 +1,49 @@
+
+> chatterbox@0.0.1 test /Users/student/2014-12-chatterbox-server
+> mocha server/spec
+
+in basic-server
+Listening on http://127.0.0.1:3000
+
+[0m[0m
+[0m  server[0m
+  [32m  ✓[0m[90m should respond to GET requests for /log with a 200 status code [0m
+  [32m  ✓[0m[90m should send back parsable stringified JSON [0m
+  [32m  ✓[0m[90m should send back an object [0m
+  [32m  ✓[0m[90m should send an object containing a `results` array [0m
+  [32m  ✓[0m[90m should accept POST requests to /send [0m
+  [31m  1) should respond with messages that were previously posted[0m
+  [36m  - Should 404 when asked for a nonexistent file[0m
+
+[0m  Node Server Request Listener Function[0m
+[object Object]Serving request type GET for url /classes/room1
+  [32m  ✓[0m[90m Should answer GET requests for /classes/room with a 200 status code [0m
+[object Object]Serving request type GET for url /classes/room1
+  [32m  ✓[0m[90m Should send back parsable stringified JSON [0m
+[object Object]Serving request type GET for url /classes/room1
+  [32m  ✓[0m[90m Should send back an object [0m
+[object Object]Serving request type GET for url /classes/room1
+  [32m  ✓[0m[90m Should send an object containing a `results` array [0m
+[object Object]Serving request type POST for url /classes/room1
+{ url: '/classes/room1',
+  method: 'POST',
+  _postData: { username: 'Jono', message: 'Do my bidding!' },
+  setEncoding: [Function],
+  on: [Function],
+  addListener: [Function] }
+  [32m  ✓[0m[90m Should accept posts to /classes/room [0m
+[object Object]Serving request type POST for url /classes/room1
+{ url: '/classes/room1',
+  method: 'POST',
+  _postData: { username: 'Jono', message: 'Do my bidding!' },
+  setEncoding: [Function],
+  on: [Function],
+  addListener: [Function] }
+[object Object]Serving request type GET for url /classes/room1
+  [31m  2) Should respond with messages that were previously posted[0m
+  [36m  - Should 404 when asked for a nonexistent file[0m
+
+
+[92m [0m[32m 10 passing[0m[90m (51ms)[0m
+[36m [0m[36m 2 pending[0m
+

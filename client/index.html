@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- dependencies -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+
+    <!-- your scripts -->
+    <script src="env/config.js"></script>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>chatterbox</h1>
+      <input id="usermessage" type="text" name="usermessage"
+        placeholder="Enter a message for chatterbox"></input>
+      <input id="submit" type="button" value="Send message!"></input>
+      <input id="roomname" type="text" name="roomname"
+        placeholder="Enter a chat room to enter or add"></input>
+      <input id="room-clear" type="button" value="Clear room"></input>
+      <div id="chats"></div>
+    </div>
+  </body>
+</html>

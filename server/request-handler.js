@@ -40,7 +40,9 @@ module.exports.requestHandler = function(request, response) {
   if (!(acceptableURL.test(request.url+""))){
     console.log(request.url);
     console.log('404ed')
-    var statusCode = 404;
+    var statusCode = 404;var headers = defaultCorsHeaders;
+    headers['Content-Type'] = "application/json";
+    response.writeHead(statusCode, headers);
     response.end('Page not found');
   }
 
@@ -49,6 +51,9 @@ module.exports.requestHandler = function(request, response) {
     var statusCode = 200;
     messageDataStr = JSON.stringify(messageData);
     // console.log(messageData.results);
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = "application/json";
+    response.writeHead(statusCode, headers);
     response.end(messageDataStr);
   }
 
@@ -72,14 +77,18 @@ module.exports.requestHandler = function(request, response) {
       result.push(newMessage);
       messageDataStr = JSON.stringify(messageData);
       console.log(messageData.results);
+      var headers = defaultCorsHeaders;
+      headers['Content-Type'] = "application/json";
+      response.writeHead(statusCode, headers);
       response.end(messageDataStr);
     });
   }
 
 
   // See the note below about CORS headers.
-  var headers = defaultCorsHeaders;
-  headers['Content-Type'] = "application/json";
+  //var headers = defaultCorsHeaders;
+  //headers['Content-Type'] = "application/json";
+  //   response.writeHead(statusCode, headers);
 
   // Tell the client we are sending them plain text.
   //
@@ -88,7 +97,6 @@ module.exports.requestHandler = function(request, response) {
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
-  response.writeHead(statusCode, headers);
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to

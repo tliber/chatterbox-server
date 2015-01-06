@@ -66,8 +66,7 @@ describe('server', function() {
         });
     });
   });
-
-  xit('Should 404 when asked for a nonexistent file', function(done) {
+  it('Should 404 when asked for a nonexistent file', function(done) {
     request('http://127.0.0.1:3000/arglebargle', function(error, response, body) {
       expect(response.statusCode).to.equal(404);
       done();

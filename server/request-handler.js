@@ -11,6 +11,10 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+  var acceptableURL = /\.*classes\.*/
+  //acceptableURL.test('')
+  var result = [];
+  var messageData = {results:result};
 
 module.exports.requestHandler = function(request, response) {
   // Request and Response come from node's http module.
@@ -29,17 +33,26 @@ module.exports.requestHandler = function(request, response) {
   // console.logs in your code.
   console.log("Serving request type " + request.method + " for url " + request.url);
 
-  var result = [];
-  var messageData = {'results':result};
   //messageData = JSON.stringify(messageData);
   // The outgoing status.
-  if (request.method === 'GET'){
-    var statusCode = 200;
-    messageData = JSON.stringify(messageData);
-    response.end(messageData);
-  };
 
-  if (request.method === 'POST'){
+
+  if (!(acceptableURL.test(request.url+""))){
+    console.log(request.url);
+    console.log('404ed')
+    var statusCode = 404;
+    response.end('Page not found');
+  }
+
+  if (request.method === 'GET' && acceptableURL.test(request.url+"")){
+
+    var statusCode = 200;
+    messageDataStr = JSON.stringify(messageData);
+    // console.log(messageData.results);
+    response.end(messageDataStr);
+  }
+
+  if (request.method === 'POST' && acceptableURL.test(request.url+"")){
     var statusCode = 201;
     var testString = '';
 
@@ -57,20 +70,21 @@ module.exports.requestHandler = function(request, response) {
     request.on('end',function(){
       var newMessage = JSON.parse(testString);
       result.push(newMessage);
-      console.log(messageData);
-      messageData = JSON.stringify(messageData);
-      response.end(messageData);
+      messageDataStr = JSON.stringify(messageData);
+      console.log(messageData.results);
+      response.end(messageDataStr);
     });
-  };
+  }
+
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
+  headers['Content-Type'] = "application/json";
 
   // Tell the client we are sending them plain text.
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = "application/json";
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
